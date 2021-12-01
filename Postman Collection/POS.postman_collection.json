@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "bcdf9922-939b-491e-b276-cbccaa422410",
+		"name": "POS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Barang",
+			"item": [
+				{
+					"name": "Get Barang",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}api/barang/",
+							"host": [
+								"{{API_URL}}api"
+							],
+							"path": [
+								"barang",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Barang",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama\":\"Keyboard\",\r\n    \"kode\":\"BR002\",\r\n    \"harga\": 120000,\r\n    \"satuan\":\"pcs\",\r\n    \"created_by\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}api/barang/add",
+							"host": [
+								"{{API_URL}}api"
+							],
+							"path": [
+								"barang",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Barang",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama\":\"Mouse Wireless\",\r\n    \"kode\":\"BR001\",\r\n    \"harga\": 212000,\r\n    \"satuan\":\"pcs\",\r\n    \"updated_by\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}api/barang/update/1",
+							"host": [
+								"{{API_URL}}api"
+							],
+							"path": [
+								"barang",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Barang",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}api/barang/delete/22",
+							"host": [
+								"{{API_URL}}api"
+							],
+							"path": [
+								"barang",
+								"delete",
+								"22"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

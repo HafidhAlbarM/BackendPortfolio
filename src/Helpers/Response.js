@@ -12,7 +12,7 @@ module.exports = {
     let response = {
       success: false,
       message,
-      data,
+      errorMessage: JSON.stringify(data),
     };
 
     return response;
