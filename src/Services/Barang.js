@@ -1,9 +1,22 @@
 const BarangModel = require("../Models/Barang");
 const response = require("../Helpers/Response");
+const Redis = require("redis");
+const redisClient = Redis.createClient();
+redisClient.connect();
 
 module.exports = {
-  getAllBarang: () => {
-    return BarangModel.query();
+  getAllBarang: async () => {
+    const redisData = await redisClient.get("barang");
+
+    if (redisData != null) {
+      console.log("data from redis cache");
+      return JSON.parse(redisData);
+    } else {
+      console.log("data from database");
+      const dataBarang = await BarangModel.query();
+      redisClient.set("barang", JSON.stringify(dataBarang));
+      return dataBarang;
+    }
   },
   getBarangById: (id) => {
     return new Promise((resolve, reject) => {
