@@ -19,24 +19,31 @@ module.exports = {
 
     const dataInsert = { nama, kode, harga, satuan, created_at, created_by };
 
-    const insertBarang = await BarangService.insertBarang(dataInsert)
-      .then((result) => {
-        res.json(response.success("Berhasil Menambahkan Data Barang", result));
-      })
-      .catch((error) => {
-        res.json(response.failed("Gagal Menambahkan Data Barang", error));
-      });
+    const cekKodeExists = await BarangService.getBarangByKode(kode);
+
+    if (cekKodeExists) {
+      res.json(response.failed("Kode harus unik"));
+    } else {
+      const insertBarang = await BarangService.insertBarang(dataInsert)
+        .then((result) => {
+          res.json(
+            response.success("Berhasil Menambahkan Data Barang", result)
+          );
+        })
+        .catch((error) => {
+          res.json(response.failed("Gagal Menambahkan Data Barang", error));
+        });
+    }
   },
   update: async (req, res) => {
     const id_barang = req.params.id_barang;
     const nama = req.body.nama || "";
-    const kode = req.body.kode || null;
     const harga = req.body.harga || 0;
     const satuan = req.body.satuan || "";
     const updated_at = new Date();
     const updated_by = req.body.updated_by;
 
-    const dataUpdate = { nama, kode, harga, satuan, updated_at, updated_by };
+    const dataUpdate = { nama, harga, satuan, updated_at, updated_by };
     const where = { id_barang };
 
     const getBarangById = await BarangService.getBarangById(id_barang);

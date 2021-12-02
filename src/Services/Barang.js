@@ -1,5 +1,4 @@
 const BarangModel = require("../Models/Barang");
-const response = require("../Helpers/Response");
 const Redis = require("redis");
 const redisClient = Redis.createClient();
 redisClient.connect();
@@ -26,7 +25,23 @@ module.exports = {
           resolve(result);
         })
         .catch((error) => {
-          response.failed("Gagal mendapatkan data barang", error);
+          reject(error.message);
+        });
+    });
+  },
+  getBarangByKode: (kode) => {
+    return new Promise((resolve, reject) => {
+      BarangModel.query()
+        .where("kode", kode)
+        .then((result) => {
+          if (result.length > 0) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        })
+        .catch((error) => {
+          reject(error.message);
         });
     });
   },
@@ -38,7 +53,7 @@ module.exports = {
           resolve(result);
         })
         .reject((error) => {
-          response.failed("Gagal menambahkan data barang", error);
+          reject(error.message);
         });
     });
   },
@@ -52,7 +67,7 @@ module.exports = {
           resolve(result);
         })
         .catch((error) => {
-          response.failed("Gagal mengubah data barang", error);
+          reject(error.message);
         });
     });
   },
@@ -64,7 +79,7 @@ module.exports = {
           resolve(result);
         })
         .catch((error) => {
-          response.failed("Gagal menghapus data barang", error);
+          reject(error.message);
         });
     });
   },
